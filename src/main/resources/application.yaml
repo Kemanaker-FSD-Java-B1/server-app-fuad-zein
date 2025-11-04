@@ -1,0 +1,25 @@
+spring:
+  # project name
+  application:
+    name: Server App
+
+  # MySQL Database Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3307/kemnaker_java_1
+    username: fuzi
+    password: kucing
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JPA/Hibernate Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: true
+        format_sql: true
+
+# setup port
+server:
+  port: 9000
