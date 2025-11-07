@@ -1,6 +1,8 @@
 package com.project.serverapp.service;
 
+import com.project.serverapp.dto.CountryDTO;
 import com.project.serverapp.dto.request.CountryRequest;
+import com.project.serverapp.mapper.CountryMapper;
 import com.project.serverapp.model.Country;
 import com.project.serverapp.model.Region;
 import com.project.serverapp.repo.CountryRepo;
@@ -17,6 +19,7 @@ public class CountryService {
 
   private CountryRepo countryRepo;
   private RegionService regionService;
+  private CountryMapper countryMapper;
 
   public List<Country> getAll() {
     return countryRepo.findAll();
@@ -59,6 +62,16 @@ public class CountryService {
     BeanUtils.copyProperties(countryRequest, country);
 
     Region region = regionService.getById(countryRequest.getRegionId());
+    country.setRegion(region);
+
+    return countryRepo.save(country);
+  }
+
+  // with dto mapstruct
+  public Country createDTOMapstruct(CountryDTO countryDTO) {
+    Country country = countryMapper.toCountry(countryDTO);
+
+    Region region = regionService.getById(countryDTO.getRegionId());
     country.setRegion(region);
 
     return countryRepo.save(country);

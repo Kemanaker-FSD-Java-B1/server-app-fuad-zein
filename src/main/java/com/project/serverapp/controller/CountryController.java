@@ -1,5 +1,6 @@
 package com.project.serverapp.controller;
 
+import com.project.serverapp.dto.CountryDTO;
 import com.project.serverapp.dto.request.CountryRequest;
 import com.project.serverapp.model.Country;
 import com.project.serverapp.service.CountryService;
@@ -47,6 +48,12 @@ public class CountryController {
   @PostMapping("/dto-bean")
   public Country createDTOBean(@RequestBody CountryRequest countryRequest) {
     return countryService.createDTOBean(countryRequest);
+  }
+
+  // with dto mapstruct
+  @PostMapping("/dto-mapstruct")
+  public Country createDTOMapstruct(@RequestBody CountryDTO countryDTO) {
+    return countryService.createDTOMapstruct(countryDTO);
   }
 
   @PutMapping("/{id}")
