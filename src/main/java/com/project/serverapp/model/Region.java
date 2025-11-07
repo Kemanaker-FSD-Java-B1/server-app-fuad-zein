@@ -1,11 +1,16 @@
 package com.project.serverapp.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,4 +29,9 @@ public class Region {
 
   @Column(name = "region_name", unique = true, nullable = false, length = 20)
   private String name;
+
+  @OneToMany(mappedBy = "region")
+  // @JsonManagedReference
+  @JsonProperty(access = Access.WRITE_ONLY)
+  private List<Country> countries;
 }
