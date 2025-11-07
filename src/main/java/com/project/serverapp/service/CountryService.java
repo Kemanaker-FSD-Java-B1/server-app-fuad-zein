@@ -2,11 +2,15 @@ package com.project.serverapp.service;
 
 import com.project.serverapp.dto.CountryDTO;
 import com.project.serverapp.dto.request.CountryRequest;
+import com.project.serverapp.dto.response.CountryResponse;
 import com.project.serverapp.mapper.CountryMapper;
 import com.project.serverapp.model.Country;
 import com.project.serverapp.model.Region;
 import com.project.serverapp.repo.CountryRepo;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
@@ -25,6 +29,43 @@ public class CountryService {
 
   public List<Country> getAll() {
     return countryRepo.findAll();
+  }
+
+  // get all with map
+  public List<Map<String, Object>> getAllMap() {
+    return countryRepo
+      .findAll()
+      .stream()
+      .map(country -> {
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("Country id", country.getId());
+        result.put("Country code", country.getCode());
+        result.put("Country name", country.getName());
+        result.put("Region id", country.getRegion().getId());
+        result.put("Region name", country.getRegion().getName());
+
+        return result;
+      })
+      .collect(Collectors.toList());
+  }
+
+  // get all with build
+  public List<CountryResponse> getAllBuild() {
+    return countryRepo
+      .findAll()
+      .stream()
+      .map(country -> {
+        return CountryResponse
+          .builder()
+          .countryId(country.getId())
+          .countryCode(country.getCode())
+          .countryName(country.getName())
+          .regionId(country.getRegion().getId())
+          .regionName(country.getRegion().getName())
+          .build();
+      })
+      .collect(Collectors.toList());
   }
 
   public List<CountryDTO> getAllDTOMapstruct() {

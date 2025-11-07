@@ -2,9 +2,11 @@ package com.project.serverapp.controller;
 
 import com.project.serverapp.dto.CountryDTO;
 import com.project.serverapp.dto.request.CountryRequest;
+import com.project.serverapp.dto.response.CountryResponse;
 import com.project.serverapp.model.Country;
 import com.project.serverapp.service.CountryService;
 import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,18 @@ public class CountryController {
   @GetMapping
   public List<Country> getAll() {
     return countryService.getAll();
+  }
+
+  // get all with map
+  @GetMapping("/all-map")
+  public List<Map<String, Object>> getAllMap() {
+    return countryService.getAllMap();
+  }
+
+  // get all with build
+  @GetMapping("/all-build")
+  public List<CountryResponse> getAllBuild() {
+    return countryService.getAllBuild();
   }
 
   @GetMapping("/dto-mapstruct")
