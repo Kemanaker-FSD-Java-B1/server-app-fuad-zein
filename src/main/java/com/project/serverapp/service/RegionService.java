@@ -19,7 +19,7 @@ public class RegionService {
   }
 
   @SuppressWarnings("null")
-  public Region getById(Long id) {
+  public Region getById(Integer id) {
     return regionRepo
       .findById(id)
       .orElseThrow(() ->
@@ -32,14 +32,14 @@ public class RegionService {
     return regionRepo.save(region);
   }
 
-  public Region update(Long id, Region region) {
+  public Region update(Integer id, Region region) {
     getById(id); // validasi
     region.setId(id); // set id
     return regionRepo.save(region);
   }
 
   @SuppressWarnings("null")
-  public Region delete(Long id) {
+  public Region delete(Integer id) {
     Region region = getById(id);
     regionRepo.delete(region);
     return region;

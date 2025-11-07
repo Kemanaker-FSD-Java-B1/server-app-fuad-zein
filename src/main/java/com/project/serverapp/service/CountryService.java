@@ -1,9 +1,12 @@
 package com.project.serverapp.service;
 
+import com.project.serverapp.dto.request.CountryRequest;
 import com.project.serverapp.model.Country;
+import com.project.serverapp.model.Region;
 import com.project.serverapp.repo.CountryRepo;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class CountryService {
 
   private CountryRepo countryRepo;
+  private RegionService regionService;
 
   public List<Country> getAll() {
     return countryRepo.findAll();
@@ -30,8 +34,33 @@ public class CountryService {
       );
   }
 
+  // without dto
   @SuppressWarnings("null")
   public Country create(Country country) {
+    return countryRepo.save(country);
+  }
+
+  // with manual dto
+  public Country createDTOManual(CountryRequest countryRequest) {
+    Country country = new Country();
+    country.setCode(countryRequest.getCode());
+    country.setName(countryRequest.getName());
+
+    Region region = regionService.getById(countryRequest.getRegionId());
+    country.setRegion(region);
+
+    return countryRepo.save(country);
+  }
+
+  // with dto bean utils
+  @SuppressWarnings("null")
+  public Country createDTOBean(CountryRequest countryRequest) {
+    Country country = new Country();
+    BeanUtils.copyProperties(countryRequest, country);
+
+    Region region = regionService.getById(countryRequest.getRegionId());
+    country.setRegion(region);
+
     return countryRepo.save(country);
   }
 

@@ -1,5 +1,6 @@
 package com.project.serverapp.controller;
 
+import com.project.serverapp.dto.request.CountryRequest;
 import com.project.serverapp.model.Country;
 import com.project.serverapp.service.CountryService;
 import java.util.List;
@@ -30,9 +31,22 @@ public class CountryController {
     return countryService.getById(id);
   }
 
+  // without dto
   @PostMapping
   public Country create(@RequestBody Country country) {
     return countryService.create(country);
+  }
+
+  // with manual dto
+  @PostMapping("/dto-manual")
+  public Country createDTOManual(@RequestBody CountryRequest countryRequest) {
+    return countryService.createDTOManual(countryRequest);
+  }
+
+  // with dto bean utils
+  @PostMapping("/dto-bean")
+  public Country createDTOBean(@RequestBody CountryRequest countryRequest) {
+    return countryService.createDTOBean(countryRequest);
   }
 
   @PutMapping("/{id}")

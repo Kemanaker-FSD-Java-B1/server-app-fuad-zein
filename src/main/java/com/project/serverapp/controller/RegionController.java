@@ -26,7 +26,7 @@ public class RegionController {
   }
 
   @GetMapping("/{id}")
-  public Region getById(@PathVariable Long id) {
+  public Region getById(@PathVariable Integer id) {
     return regionService.getById(id);
   }
 
@@ -36,12 +36,12 @@ public class RegionController {
   }
 
   @PutMapping("/{id}")
-  public Region update(@PathVariable Long id, @RequestBody Region region) {
+  public Region update(@PathVariable Integer id, @RequestBody Region region) {
     return regionService.update(id, region);
   }
 
   @DeleteMapping("/{id}")
-  public Region delete(@PathVariable Long id) {
+  public Region delete(@PathVariable Integer id) {
     return regionService.delete(id);
   }
 }
