@@ -27,6 +27,11 @@ public class CountryController {
     return countryService.getAll();
   }
 
+  @GetMapping("/dto-mapstruct")
+  public List<CountryDTO> getAllDTOMapstruct() {
+    return countryService.getAllDTOMapstruct();
+  }
+
   @GetMapping("/{id}")
   public Country getById(@PathVariable Integer id) {
     return countryService.getById(id);

@@ -6,6 +6,7 @@ import com.project.serverapp.mapper.CountryMapper;
 import com.project.serverapp.model.Country;
 import com.project.serverapp.model.Region;
 import com.project.serverapp.repo.CountryRepo;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -23,6 +24,11 @@ public class CountryService {
 
   public List<Country> getAll() {
     return countryRepo.findAll();
+  }
+
+  public List<CountryDTO> getAllDTOMapstruct() {
+    List<CountryDTO> results = countryMapper.todoList(getAll());
+    return results;
   }
 
   @SuppressWarnings("null")
