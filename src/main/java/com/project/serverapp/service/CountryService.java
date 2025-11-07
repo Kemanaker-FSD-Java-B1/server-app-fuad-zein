@@ -6,9 +6,9 @@ import com.project.serverapp.mapper.CountryMapper;
 import com.project.serverapp.model.Country;
 import com.project.serverapp.model.Region;
 import com.project.serverapp.repo.CountryRepo;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,6 +21,7 @@ public class CountryService {
   private CountryRepo countryRepo;
   private RegionService regionService;
   private CountryMapper countryMapper;
+  private ModelMapper modelMapper;
 
   public List<Country> getAll() {
     return countryRepo.findAll();
@@ -78,6 +79,16 @@ public class CountryService {
     Country country = countryMapper.toCountry(countryDTO);
 
     Region region = regionService.getById(countryDTO.getRegionId());
+    country.setRegion(region);
+
+    return countryRepo.save(country);
+  }
+
+  // with dto model mapper
+  public Country createDTOModelMapper(CountryRequest countryRequest) {
+    Country country = modelMapper.map(countryRequest, Country.class);
+
+    Region region = regionService.getById(countryRequest.getRegionId());
     country.setRegion(region);
 
     return countryRepo.save(country);

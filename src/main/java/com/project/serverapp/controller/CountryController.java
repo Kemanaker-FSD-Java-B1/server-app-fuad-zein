@@ -61,6 +61,14 @@ public class CountryController {
     return countryService.createDTOMapstruct(countryDTO);
   }
 
+  // with dto model mapper
+  @PostMapping("/dto-model")
+  public Country createDTOModelMapper(
+    @RequestBody CountryRequest countryRequest
+  ) {
+    return countryService.createDTOModelMapper(countryRequest);
+  }
+
   @PutMapping("/{id}")
   public Country update(
     @PathVariable Integer id,

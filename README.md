@@ -5,3 +5,4 @@
 ### References:
 - [mapstruct](https://mapstruct.org/documentation/installation/)
 - [A guide to MapStruct with Spring Boot, Vavr & Lombok](https://medium.com/@tijl.b/a-guide-to-mapstruct-with-spring-boot-vavr-lombok-d5325b436220)
+- [modelmapper](https://modelmapper.org/)
