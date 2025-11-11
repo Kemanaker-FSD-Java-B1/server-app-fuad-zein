@@ -7,6 +7,7 @@ import com.project.serverapp.mapper.CountryMapper;
 import com.project.serverapp.model.Country;
 import com.project.serverapp.model.Region;
 import com.project.serverapp.repo.CountryRepo;
+import com.project.serverapp.repo.RegionRepo;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ public class CountryService {
   private RegionService regionService;
   private CountryMapper countryMapper;
   private ModelMapper modelMapper;
+  private RegionRepo regionRepo;
 
   public List<Country> getAll() {
     return countryRepo.findAll();
@@ -87,14 +89,24 @@ public class CountryService {
 
   // without dto
   public Country create(Country country) {
-    if (
-      !countryRepo
-        .findByNameOrRegion_Name(country.getName(), country.getName())
-        .isEmpty()
-    ) {
+    /**
+     * Challanges:
+     * 1. bug
+     * 2. penyebab bug
+     * 3. solusi
+     */
+
+    if (countryRepo.existsByName(country.getName())) {
       throw new ResponseStatusException(
         HttpStatus.CONFLICT,
-        "Name is already exists!!!"
+        "Country Name is already exists!!!"
+      );
+    }
+
+    if (!regionRepo.searchByName(country.getName()).isEmpty()) {
+      throw new ResponseStatusException(
+        HttpStatus.CONFLICT,
+        "Region name is already exists!!!"
       );
     }
 
