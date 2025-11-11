@@ -9,3 +9,4 @@
 - [Spring Data JPA @Query](https://www.baeldung.com/spring-data-jpa-query)
 - [JPA Query Methods](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html)
 - [Repository query keywords](https://docs.spring.io/spring-data/jpa/reference/repositories/query-keywords-reference.html)
+- [Guide to Spring Email](https://www.baeldung.com/spring-email)

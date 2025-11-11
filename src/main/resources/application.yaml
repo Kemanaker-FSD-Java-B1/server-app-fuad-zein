@@ -20,6 +20,20 @@ spring:
         show_sql: true
         format_sql: true
 
+  # email
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: metrodataacedemy@gmail.com
+    password: jzly bjup xbqn mhsh
+    properties:
+      smtp: 
+        auth: true
+      mail:
+        smtp:
+          starttls: 
+            enable: true
+
 # setup port
 server:
   port: 9000
