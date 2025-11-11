@@ -86,8 +86,18 @@ public class CountryService {
   }
 
   // without dto
-  @SuppressWarnings("null")
   public Country create(Country country) {
+    if (
+      !countryRepo
+        .findByNameOrRegion_Name(country.getName(), country.getName())
+        .isEmpty()
+    ) {
+      throw new ResponseStatusException(
+        HttpStatus.CONFLICT,
+        "Name is already exists!!!"
+      );
+    }
+
     return countryRepo.save(country);
   }
 
