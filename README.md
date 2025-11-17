@@ -10,3 +10,5 @@
 - [JPA Query Methods](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html)
 - [Repository query keywords](https://docs.spring.io/spring-data/jpa/reference/repositories/query-keywords-reference.html)
 - [Guide to Spring Email](https://www.baeldung.com/spring-email)
+- [One to One - Baeldung](https://www.baeldung.com/jpa-one-to-one)
+- [Many to Many - Baeldung](https://www.baeldung.com/jpa-many-to-many)
