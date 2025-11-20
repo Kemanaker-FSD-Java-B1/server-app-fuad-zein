@@ -9,7 +9,6 @@ import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface RegistrationResponseMapper {
-  
   @Mapping(source = "employee.name", target = "name")
   @Mapping(source = "employee.email", target = "email")
   @Mapping(source = "employee.phone", target = "phone")

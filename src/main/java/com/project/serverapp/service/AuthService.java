@@ -11,6 +11,7 @@ import com.project.serverapp.model.User;
 import com.project.serverapp.repo.UserRepo;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,6 +23,7 @@ public class AuthService {
   private RoleService roleService;
   private UserRepo userRepo;
   private RegistrationResponseMapper registrationResponseMapper;
+  private PasswordEncoder passwordEncoder;
 
   public RegistrationResponse registration(
     RegistrationRequest registrationRequest
@@ -31,6 +33,9 @@ public class AuthService {
 
     // mapping dto -> user
     User user = userMapper.toUser(registrationRequest);
+
+    // set password
+    user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
 
     // default role
     Role defaultRole = roleService.getById(2);
