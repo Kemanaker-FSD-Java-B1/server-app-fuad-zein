@@ -1,12 +1,12 @@
 package com.project.serverapp.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.List;
@@ -28,11 +28,7 @@ public class Role {
   @Column(unique = true, nullable = false)
   private String name;
 
-  @ManyToMany
-  @JoinTable(
-    name = "tb_tr_role_user",
-    joinColumns = @JoinColumn(name = "role_id"),
-    inverseJoinColumns = @JoinColumn(name = "user_id")
-  )
+  @ManyToMany(mappedBy = "roles")
+  @JsonProperty(access = Access.WRITE_ONLY)
   private List<User> users;
 }

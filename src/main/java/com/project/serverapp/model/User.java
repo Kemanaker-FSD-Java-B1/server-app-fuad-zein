@@ -1,9 +1,12 @@
 package com.project.serverapp.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
@@ -32,8 +35,14 @@ public class User {
   @OneToOne
   @MapsId
   @JoinColumn(name = "id")
+  @JsonProperty(access = Access.WRITE_ONLY)
   private Employee employee;
 
-  @ManyToMany(mappedBy = "users")
+  @ManyToMany
+  @JoinTable(
+    name = "tb_tr_role_user",
+    joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id")
+  )
   private List<Role> roles;
 }

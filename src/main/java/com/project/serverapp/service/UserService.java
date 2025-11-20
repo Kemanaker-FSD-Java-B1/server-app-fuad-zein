@@ -27,10 +27,11 @@ public class UserService {
       );
   }
 
-  @SuppressWarnings("null")
-  public User create(User user) {
-    return userRepo.save(user);
-  }
+  // ! not use -> one to one 
+  // @SuppressWarnings("null")
+  // public User create(User user) {
+  //   return userRepo.save(user);
+  // }
 
   public User update(Integer id, User user) {
     getById(id); // validasi
@@ -38,10 +39,11 @@ public class UserService {
     return userRepo.save(user);
   }
 
-  @SuppressWarnings("null")
-  public User delete(Integer id) {
-    User user = getById(id);
-    userRepo.delete(user);
-    return user;
-  }
+  // ! not use -> one to one
+  // @SuppressWarnings("null")
+  // public User delete(Integer id) {
+  //   User user = getById(id);
+  //   userRepo.delete(user);
+  //   return user;
+  // }
 }

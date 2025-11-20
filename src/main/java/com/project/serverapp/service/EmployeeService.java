@@ -30,10 +30,11 @@ public class EmployeeService {
       );
   }
 
-  @SuppressWarnings("null")
-  public Employee create(Employee employee) {
-    return employeeRepo.save(employee);
-  }
+  // ! not use -> one to one 
+  // @SuppressWarnings("null")
+  // public Employee create(Employee employee) {
+  //   return employeeRepo.save(employee);
+  // }
 
   public Employee update(Integer id, Employee employee) {
     getById(id); // validasi
