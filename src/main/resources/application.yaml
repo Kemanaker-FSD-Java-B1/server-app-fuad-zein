@@ -33,6 +33,12 @@ spring:
         smtp:
           starttls: 
             enable: true
+  
+  # security
+  # security:
+  #   user:
+  #     name: budi
+  #     password: budi
 
 # setup port
 server:
