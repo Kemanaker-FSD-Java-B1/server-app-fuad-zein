@@ -20,6 +20,14 @@
 - [Handling Passwords with Spring Boot and Spring Security](https://reflectoring.io/spring-security-password-handling/)
 - [Base64](https://www.base64decode.org/)
 - [Bcrypt Hash Generator](https://bcrypt-generator.com/)
+- [Architecture Spring Security](https://docs.spring.io/spring-security/reference/servlet/architecture.html)
+- [Spring Boot 3 + Spring Security 6 In Depth Understanding](https://medium.com/@aiagentofchange/spring-boot-3-spring-security-6-in-depth-understanding-927bb5e826ee)
+- [Spring Security – Roles and Privileges](https://www.baeldung.com/role-and-privilege-for-spring-security-registration)
+- [Spring Boot Security Auto-Configuration](https://www.baeldung.com/spring-boot-security-autoconfiguration)
+- [How to Manually Authenticate User with Spring Security](https://www.baeldung.com/manually-set-user-authentication-spring-security)
+- [Update the Spring Security configuration class with Spring Boot 2.7.0](https://github.com/spring-projects/spring-boot/issues/31239)
+- [Update the Spring Security configuration class with Spring Boot 2.7.3](https://stackoverflow.com/questions/72427751/update-the-spring-security-configuration-class-with-spring-boot-2-7-3)
+- [Document how to publish an AuthenticationManager @Bean without WebSecurityConfigurerAdapter](https://github.com/spring-projects/spring-security/issues/11926)
 
 ---
 
