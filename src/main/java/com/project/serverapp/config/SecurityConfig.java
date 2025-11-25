@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -22,8 +23,10 @@ public class SecurityConfig {
   private AppUserDetailService appUserDetailService;
 
   @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http)
-    throws Exception {
+  public SecurityFilterChain securityFilterChain(
+    HttpSecurity http,
+    JwtAuthenticationFilterConfig jwtFilter
+  ) throws Exception {
     http
       .cors(cors -> cors.disable())
       .csrf(csrf -> csrf.disable())
@@ -37,9 +40,10 @@ public class SecurityConfig {
           .authenticated()
       )
       .sessionManagement(session ->
-        session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
       )
       .userDetailsService(appUserDetailService)
+      .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
       .httpBasic(httpBasic -> httpBasic.disable())
       .formLogin(form -> form.disable());
 

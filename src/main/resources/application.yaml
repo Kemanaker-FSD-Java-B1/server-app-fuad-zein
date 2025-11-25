@@ -27,13 +27,13 @@ spring:
     username: metrodataacedemy@gmail.com
     password: jzly bjup xbqn mhsh
     properties:
-      smtp: 
+      smtp:
         auth: true
       mail:
         smtp:
-          starttls: 
+          starttls:
             enable: true
-  
+
   # security
   # security:
   #   user:
@@ -43,3 +43,7 @@ spring:
 # setup port
 server:
   port: 9000
+
+# jwt secret key
+jwt:
+  secret: Zx61xftk00m2vNhizxV/MU3+CjgMyJ0/HoyQH96HV94=

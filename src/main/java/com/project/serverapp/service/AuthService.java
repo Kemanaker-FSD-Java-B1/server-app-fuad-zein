@@ -4,6 +4,7 @@ import com.project.serverapp.dto.request.LoginRequest;
 import com.project.serverapp.dto.request.RegistrationRequest;
 import com.project.serverapp.dto.response.LoginResponse;
 import com.project.serverapp.dto.response.RegistrationResponse;
+import com.project.serverapp.helper.JwtHelper;
 import com.project.serverapp.mapper.EmployeeMapper;
 import com.project.serverapp.mapper.RegistrationResponseMapper;
 import com.project.serverapp.mapper.UserMapper;
@@ -35,6 +36,7 @@ public class AuthService {
   private PasswordEncoder passwordEncoder;
   private AuthenticationManager authenticationManager;
   private AppUserDetailService appUserDetailService;
+  private JwtHelper jwtHelper;
 
   public RegistrationResponse registration(
     RegistrationRequest registrationRequest
@@ -64,14 +66,15 @@ public class AuthService {
   }
 
   public LoginResponse login(LoginRequest loginRequest) {
-    // get username & password
-    UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(
-      loginRequest.getUsername(),
-      loginRequest.getPassword()
+    // authenticate user dengan authentication manager
+    Authentication auth = authenticationManager.authenticate(
+      new UsernamePasswordAuthenticationToken(
+        loginRequest.getUsername(),
+        loginRequest.getPassword()
+      )
     );
 
-    // set session
-    Authentication auth = authenticationManager.authenticate(authReq);
+    // set session - set authentication di security context
     SecurityContext sc = SecurityContextHolder.getContext();
     sc.setAuthentication(auth);
 
@@ -95,12 +98,16 @@ public class AuthService {
       .map(authority -> authority.getAuthority())
       .collect(Collectors.toList());
 
+    // generate token jwt
+    String token = jwtHelper.generateToken(userDetails.getUsername());
+
     // return response
     LoginResponse loginResponse = LoginResponse
       .builder()
       .username(userDetails.getUsername())
       .email(user.getEmployee().getEmail())
       .authorities(authorities)
+      .token(token)
       .build();
 
     return loginResponse;
